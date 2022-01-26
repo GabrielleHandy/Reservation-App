@@ -43,7 +43,7 @@ class Reservation(db.Model):
 
     
     def __repr__(self):
-        return f"""Reservation reservation_id: {self.reservation_id} \n user_id:{self.user_id} \n Date:{self.reserve_date} Time:{self.reserve_time}"""
+        return f"""Reservation\n reservation_id: {self.reservation_id} \n user_id:{self.user_id} \n Date:{self.reserve_date} Time:{self.reserve_time}"""
 
     users = db.relationship("User", back_populates="reservations")
 

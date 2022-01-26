@@ -5,21 +5,43 @@ from datetime import date
 
 def create_user(user_name, email="not entered"):
     """Creates a user"""
-    pass
+    new_user = User(user_name=user_name, email = email)
+
+    db.session.add(new_user)
+    db.session.commit()
+    
 
 
 def create_reservations(user_id, reserve_date, reserve_time):
     """Creates a reservation"""
-    pass
+    new_reservation = Reservation(user_id= user_id, reserve_date = reserve_date, reserve_time= reserve_time)
+
+    db.session.add(new_reservation)
+    db.session.commit()
+    
 
 
 # USER functions
+def get_user_by_id(user_id):
+    """Gets an instance of a user by the user_id"""
 
 
+    return User.query.get(user_id)
 
+
+def get_user_by_email(email):
+    """Gets an instance of a user by email"""
+
+    return User.query.filter(User.email == email).first()
 
 # RESERVATIONS functions
+def get_all_reservations(desired_date):
+    """Get's all reservations on the day the user 
+       wants to make a reservation"""
 
+    reservations = Reservation.query.filter(Reservation.reserve_date == desired_date).all()
+
+    return reservations
 
 
 

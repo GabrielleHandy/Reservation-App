@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{% block title %}profile page{% endblock %}
+{% block body %}
+    <h2>Hey, {{user.user_name}}</h2>
+    <div>
+        {% if user.reservations %}
+            <h3>Here are your reservations</h3>
+            <ul>
+                {% for res in user.reservations%}
+                    <li>
+                        <p>{{res.reserve_date.strftime("%m/%d/%Y")}}</p>
+                        <p>{{res.reserve_time.strftime("%I:%M %p")}}</p>
+                    </li>
+                {% endfor %}
+            </ul> 
+            {% else %}
+                <h3>You have no reservations</h3>
+                <p>Click <a href="/search_time_slots">here</a>to make a reservation</p>
+        {% endif %}
+    </div>
+{% endblock %}
