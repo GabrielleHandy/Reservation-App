@@ -1,5 +1,5 @@
 import crud
-from datetime import date,time
+from datetime import date,time, datetime
 from flask import (Flask, render_template, request, 
                    redirect, session, flash, jsonify,
                    Markup)
@@ -46,16 +46,49 @@ def profile_page(user_id):
 @app.route("/search_time_slots")
 def reserve_time_slot():
     # shows form to choose time
-    # I want to dynamically show available times on a calendar
-    # create time slots available
-    pass
+   
+    # I want to dynamically show available times on a calendar in the future
+    # create time slots available in calendar
+    return render_template("calendar.html")
 
-@app.route("/create_reservation", methods=["POST"])
+@app.route("/reservation_options", methods=["POST"])
+def show_reservation_options():
+    """Shows reservation options to user"""
+    time_min = request.json.get('min-time')
+    time_max = request.json.get('max-time')
+    input_date = request.json.get('input-date')
+
+    min_time = datetime.strptime(time_min, '%H:%M').time()
+    max_time = datetime.strptime(time_max, '%H:%M').time()
+    desired_date = datetime.strptime(input_date, '%Y-%M-%d').date()
+    
+    if crud.check_duplicate_reservation(session['user_id'], desired_date):
+        return jsonify('You already have a melontastic tasting on this day!')
+        
+    
+    else:
+        times = crud.get_available_times(desired_date, min_time, max_time)
+        print(times)
+        return jsonify(times)
+
+
+@app.route('/create_reservation', methods=['POST'])
 def create_reservation():
-    """Creates a reservation for user"""
-    pass
+    """Creates reservation for user"""
+
+    in_time = request.json.get('inputTime')
+    in_date = request.json.get('inputDate')
+    
+    desired_time = datetime.strptime(in_time, "%I:%M %p").time()
+    desired_date = datetime.strptime(in_date, '%Y-%M-%d').date()
+
+    crud.create_reservations(session['user_id'], desired_date, desired_time)
+    message= f'Reservation sucessfully made! See you on {in_date} at {in_time}!'
+    return jsonify(message)
+
+
 
 if __name__ == '__main__':
     # DebugToolbarExtension(app)
     connect_to_db(app)
-    app.run(host='000.0.0.0')
+    app.run(host='127.0.0.1', port=5002)

@@ -1,8 +1,14 @@
 {%extends 'base.html'%}
 {% block title %}login page{% endblock %}
 {% block body %}
-    <form action="/sign-in" method="post">
+<div class="container">
+    <div class="row"> 
+        <h3>Sign in with email</h3><br>
+        <p>test: test@test.com</p>
+    <form id ="sign" action="/sign-in" method="post">
         <input type="email" name="email">
         <input type="submit" value="Sign In">
     </form>
+</div>
+</div>
 {% endblock %}

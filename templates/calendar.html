@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+{% block title %}Availability page{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-7">
+                <h2>Search for availability:</h2>
+                <form id="search" action="/create_reservation" method="post">
+                    <label for="date">Date: <input required id="date" type="date" name="date"></label>
+                    <label for="min-time">From: <input required id="min-time" type="time" name="min-time"></label>
+                    <label for="max-time">To: <input required id="max-time" type="time" name="max-time"></label>
+                    <br>
+                    <input type="submit" value="Search">
+                </form>
+                <div id="available"></div>
+            </div>
+            
+            <div id="carouselExampleSlidesOnly" class=" col-5 carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="/static/images/melon-gd1aa5f46a_1920.jpg" class="d-block w-100" alt="Beautiful melon">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="/static/images/melon-gf4b9edbdd_1920.jpg" class="d-block w-100" alt="Fresh melon">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="/static/images/watermelon-g643eeafbf_1920.jpg" class="d-block w-100" alt="Delicious Melon">
+                    </div>
+                </div>
+                </div>
+                
+            
+        </div>
+    </div>
+
+    <script src="/static/calendar.js"></script>
+{% endblock %}
