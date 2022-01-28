@@ -1,10 +1,10 @@
 >>> Hey! Welcome to Melon Reservations! <<<
 
 I used sql/psql for my database.
-python anf flask on the backend and javascript on the front
+python and flask on the backend and javascript on the front
 
 
-A challenge I came across was learning how to manipulate and  compare time. I used the python datetime module to format and do time comparisons. 
+A challenge I came across was learning how to manipulate and compare time. I used the python datetime module to format and found that datetime.time objects can be compared so I used that in order to find a range of times.. 
 
 If I had more time I would have styled more, and added testing. I also wanted to add a way to remove and edit reservations. 
 
